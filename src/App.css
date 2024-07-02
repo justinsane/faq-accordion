@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-workSans bg-light-pink min-h-screen;
+  background-image: url('/background-pattern-desktop.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#root {
+  @apply flex justify-center items-center min-h-screen;
+}
