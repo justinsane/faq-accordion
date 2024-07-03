@@ -40,7 +40,7 @@ const data = [
 
 function App() {
   return (
-    <div className='bg-white px-6 py-8 rounded-2xl container shadow-lg'>
+    <div className='bg-white px-6 py-8 rounded-2xl container shadow-2xl'>
       <div className='flex flex-row items-center mb-6'>
         <img src='icon-star.svg' alt='Star icon' className='w-8' />
         <h1 className='font-bold text-4xl pl-4'>FAQs</h1>

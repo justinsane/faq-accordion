@@ -12,11 +12,11 @@ body {
 }
 
 #root {
-  @apply flex justify-center items-center min-h-screen;
+  @apply flex justify-center mt-20;
 }
 
 .container {
-  @apply w-full max-w-lg;
+  @apply w-full max-w-lg min-h-max;
 }
 
 .accordion-item {
@@ -30,10 +30,9 @@ body {
 .accordion-content {
   @apply mt-4 text-sm text-gray-700 overflow-hidden transition-all duration-300 ease-in-out;
   max-height: 0;
-  padding: 0; /* Initial padding set to 0 */
+  padding: 0;
 }
 
 .accordion-content.open {
   max-height: 300px; /* Adjust based on your content */
-  padding: 16px; /* Add padding when content is visible */
 }
