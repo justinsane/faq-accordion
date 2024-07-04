@@ -4,15 +4,26 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  @apply flex justify-center mt-20 mx-6;
+}
+
 body {
   @apply font-workSans bg-light-pink min-h-screen;
-  background-image: url('/background-pattern-desktop.svg');
   background-repeat: no-repeat;
   background-size: 100%;
 }
 
-#root {
-  @apply flex justify-center mt-20;
+@media (max-width: 767px) {
+  body {
+    background-image: url('/background-pattern-mobile.svg');
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url('/background-pattern-desktop.svg');
+  }
 }
 
 .container {
@@ -20,11 +31,15 @@ body {
 }
 
 .accordion-item {
-  @apply w-full py-4;
+  @apply w-full py-4 px-4;
 }
 
 .accordion-header {
   @apply flex justify-between items-center cursor-pointer;
+}
+
+.accordion-header:hover {
+  @apply text-grayish-purple;
 }
 
 .accordion-content {
@@ -34,5 +49,6 @@ body {
 }
 
 .accordion-content.open {
-  max-height: 300px; /* Adjust based on your content */
+  @apply mb-4;
+  max-height: 300px;
 }

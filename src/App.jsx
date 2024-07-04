@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
 
 const data = [
@@ -40,7 +40,7 @@ const data = [
 
 function App() {
   return (
-    <div className='bg-white px-6 py-8 rounded-2xl container shadow-2xl'>
+    <div className='bg-white px-6 py-8 rounded-xl container shadow-2xl '>
       <div className='flex flex-row items-center mb-6'>
         <img src='icon-star.svg' alt='Star icon' className='w-8' />
         <h1 className='font-bold text-4xl pl-4'>FAQs</h1>
@@ -52,7 +52,7 @@ function App() {
 
 function Accordion({ data }) {
   return (
-    <div className='accordion'>
+    <div className='accordion '>
       {data.map((el, index) => (
         <AccordionItem title={el.title} text={el.text} key={index} />
       ))}
@@ -62,27 +62,52 @@ function Accordion({ data }) {
 
 function AccordionItem({ title, text }) {
   const [isOpen, setIsOpen] = useState(false);
+  const headerRef = useRef(null);
 
   function handleToggle() {
     setIsOpen(prevIsOpen => !prevIsOpen);
   }
 
+  const handleKeyDown = event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleToggle();
+    } else if (event.key === 'ArrowDown') {
+      const nextSibling = headerRef.current.parentElement.nextElementSibling;
+      if (nextSibling) {
+        nextSibling.querySelector('.accordion-header').focus();
+      }
+    } else if (event.key === 'ArrowUp') {
+      const previousSibling =
+        headerRef.current.parentElement.previousElementSibling;
+      if (previousSibling) {
+        previousSibling.querySelector('.accordion-header').focus();
+      }
+    }
+  };
   return (
     <div className='accordion-item'>
       <div
         className='accordion-header'
         onClick={handleToggle}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        ref={headerRef}
+        role='button'
         aria-expanded={isOpen}
+        aria-controls={`accordion-content-${title}`}
       >
         <p className='font-bold text-sm flex-1'>{title}</p>
         <img
           src={isOpen ? 'icon-minus.svg' : 'icon-plus.svg'}
           alt='Expand or Minimize Content Icon'
-          className='w-6 ml-2 transition-transform duration-300'
+          className='w-6 ml-9 transition-transform duration-300'
           style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0)' }}
         />
       </div>
-      <div className={`accordion-content ${isOpen ? 'open' : ''}`}>
+      <div
+        id={`accordion-content-${title}`}
+        className={`accordion-content ${isOpen ? 'open' : ''}`}
+      >
         <p>{text}</p>
       </div>
     </div>
