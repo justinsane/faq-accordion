@@ -105,7 +105,7 @@ function AccordionItem({ title, text }) {
         />
       </div>
       <div
-        id={`accordion-content-${title}`}
+        id='accordion-content'
         className={`accordion-content ${isOpen ? 'open' : ''}`}
       >
         <p>{text}</p>
